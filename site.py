@@ -32,9 +32,9 @@ def people():
     return render_template('form2.html', data = (name1, name2, name3, gender, age, blood, pulse))
     #return render_template('form.html')
 
-@app.route('/sms', methods=['GET', 'POST'])
+'''@app.route('/sms', methods=['GET', 'POST'])
 def sms():
-    return render_template('video.html')
+    return render_template('video.html')'''
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
