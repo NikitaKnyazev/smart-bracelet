@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <script>
+    if ($_POST["send"]) {
+    include_once "smsc_api.php";
+    $r = send_sms($_POST["phone"], $_POST["message"], $_POST["translit"], $_POST["time"], 0, $_POST["flash"], $_POST["sender"]);
+    // $r = array(<id>, <количество sms>, <стоимость>, <баланс>) или array(<id>, -<код ошибки>)
+    if ($r[1] > 0)
+      echo "Сообщение отправлено";
+    else
+      echo "Произошла ошибка № ", -$r[1];
+    }
+  </script>
+  <form method="post" action="send.php">
+    Телефон<br/><input name="phone" value=""><br/><br/>
+    Сообщение<br/><textarea name="message" rows="4" cols="40"></textarea><br/><br/>
+    Оправитель<br/><input name="sender" value=""><br/><br/>
+    Отложить до<br/><input name="time" value=""> (дд.мм.гг чч:мм)<br/><br/>
+    <input type="checkbox" name="translit">Транслит
+    <input type="checkbox" name="flash"> Flash SMS<br/><br/>
+    <input type="submit" name="send" value="Отправить">
+  </form>
+</html>

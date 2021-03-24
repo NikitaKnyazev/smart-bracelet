@@ -1,0 +1,45 @@
+.round_red {
+  font-size: 40pt;
+  width: 4em;
+  height: 4em;
+  border: 2px solid red;
+  border-radius: 50%;
+  box-sizing: border-box;
+  line-height: 4em;
+  text-align: center;
+  margin: auto;
+  background: red;
+}
+.round_green {
+  font-size: 40pt;
+  width: 4em;
+  height: 4em;
+  border: 2px solid red;
+  border-radius: 50%;
+  box-sizing: border-box;
+  line-height: 4em;
+  text-align: center;
+  margin: auto;
+  background: #32CD32;
+}
+.round_orange {
+  font-size: 40pt;
+  width: 4em;
+  height: 4em;
+  border: 2px solid red;
+  border-radius: 50%;
+  box-sizing: border-box;
+  line-height: 4em;
+  text-align: center;
+  margin: auto;
+  background: orange;
+}
+.text1 {
+  font-size:16pt;
+  margin-left: 50px;
+  line-height: 1.5;
+}
+.text2 {
+  font-size: 16pt;
+  text-align: center;
+}

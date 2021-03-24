@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Умный браслет здоровья</title>
+    <meta http-equiv="Refresh" content="30" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  </head>
+  <body onload="initialize()">
+      <button onclick="document.location='/'">Назад</button>
+	    <h1>Состояние здоровья для</h1>
+      <br>
+      <p class="text1">
+        <b>Фамилия:</b> {{data[1]}}<br>
+        <b>Имя:</b> {{data[0]}}<br>
+        <b>Отчество:</b> {{data[2]}}<br>
+        <b>Пол:</b> {{data[3]}}<br>
+        <b>Возраст:</b> {{data[4]}}<br>
+        <b>Группа крови:</b> {{data[5]}}<br>
+      </p>
+      <br>
+      <p class = "text2"><b>Пульс:</b></p>
+      <div class="round_green">
+        <script>
+          var circle = document.querySelector("div.round_green");
+          if ({{data[6]}}>=100) {
+            circle.className = "round_red";
+          }
+          if ({{data[6]}}<60) {
+            circle.className = "round_red";
+          }
+          if ({{data[6]}}>=60) {
+            if ({{data[6]}}<70) {
+              circle.className = "round_orange";
+            }
+          }
+          if ({{data[6]}}>90) {
+            if ({{data[6]}}<100) {
+              circle.className = "round_orange";
+            }
+          }
+        </script>
+        {{data[6]}}
+      </div>
+      <br>
+      <br>
+      <br>
+      <h2 align = "center">Нахождение человека:</h2>
+      <center><button onclick="getLocation()">Показать координаты</button></center>
+      <p id="demo"></p>
+      <script>
+        var x = document.getElementById("demo");
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        function showPosition(position) {
+          x.innerHTML = "<center><br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+        }
+      </script>
+  </body>
+</html>

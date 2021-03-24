@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Умный браслет здоровья</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  </head>
+  <body>
+	    <h1>Состояние здоровья для</h1>
+      <br>
+      <form>
+        <h3>Выберите из списка</h3>
+        <select name="java-navigator" onchange="top.location.href=this.options[this.selectedIndex].value;">
+          {% for val in data[['id', 'name1', 'name2', 'name3']].values %}
+            <option value="{{ url_for('people', my_var=val) }}" selected>{{val}}</option>
+          {% endfor %}
+          <option value="" selected>...</option>
+       </select>
+      </form>
+  </body>
+</html>
