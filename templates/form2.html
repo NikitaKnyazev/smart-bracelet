@@ -4,61 +4,83 @@
     <title>Умный браслет здоровья</title>
     <meta http-equiv="Refresh" content="30" />
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+      .menu {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .menu a {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: gray;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #fff2bc;
+        border-bottom: 5px solid gray;
+      }
+      .menu li {
+        float: left;
+      }
+    </style>
+    <ul class="menu">
+      <li><a href="/" class="current">Home</a></li>
+      <li><a href="/users">People</a></li>
+    </ul>
   </head>
-  <body onload="initialize()">
-      <button onclick="document.location='/'">Назад</button>
-	    <h1>Health for</h1>
-      <br>
-      <p class="text1">
-        <b>Фамилия:</b> {{data[1]}}<br>
-        <b>Имя:</b> {{data[0]}}<br>
-        <b>Отчество:</b> {{data[2]}}<br>
-        <b>Пол:</b> {{data[3]}}<br>
-        <b>Возраст:</b> {{data[4]}}<br>
-        <b>Кровь:</b> {{data[5]}}<br>
-      </p>
-      <br>
-      <p class = "text2"><b>Пульс:</b></p>
-      <div class="round_green">
-        <script>
-          var circle = document.querySelector("div.round_green");
-          if ({{data[6]}}>=100) {
-            circle.className = "round_red";
-          }
-          if ({{data[6]}}<60) {
-            circle.className = "round_red";
-          }
-          if ({{data[6]}}>=60) {
-            if ({{data[6]}}<70) {
-              circle.className = "round_orange";
-            }
-          }
-          if ({{data[6]}}>90) {
-            if ({{data[6]}}<100) {
-              circle.className = "round_orange";
-            }
-          }
-        </script>
-        {{data[6]}}
-      </div>
-      <br>
-      <br>
-      <br>
-      <h2 align = "center">Геолокация:</h2>
-      <center><button onclick="getLocation()">Показать координаты</button></center>
-      <p id="demo"></p>
+  <body>
+	  <h1>Здоровье для</h1>
+    <br>
+    <p class="text1">
+      <b>ФИО:</b> {{ data.name }}<br>
+      <b>Пол:</b> {{ data.gender }}<br>
+      <b>Возраст:</b> {{ data.age }}<br>
+      <b>Кровь:</b> {{ data.blood }}<br>
+    </p>
+    <br>
+    <p class = "text2"><b>Пульс:</b></p>
+    <div class="round_green">
       <script>
-        var x = document.getElementById("demo");
-        function getLocation() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-          } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
+        var circle = document.querySelector("div.round_green");
+        if ({{ data.pulse }}>=100) {
+          circle.className = "round_red";
+        }
+        if ({{ data.pulse }}<60) {
+          circle.className = "round_red";
+        }
+        if ({{ data.pulse }}>=60) {
+          if ({{ data.pulse }}<70) {
+            circle.className = "round_orange";
           }
         }
-        function showPosition(position) {
-          x.innerHTML = "<center><br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+        if ({{ data.pulse }}>90) {
+          if ({{ data.pulse }}<100) {
+            circle.className = "round_orange";
+          }
         }
       </script>
+      {{ data.pulse }}
+    </div>
+    <br>
+    <br>
+    <br>
+    <h2 align = "center">Геолокация:</h2>
+    <center><button onclick="getLocation()">Показать координаты</button></center>
+    <p id="demo"></p>
+    <script>
+      var x = document.getElementById("demo");
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      function showPosition(position) {
+        x.innerHTML = "<center><br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+      }
+    </script>
   </body>
 </html>

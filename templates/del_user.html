@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Умный браслет здоровья</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+      .menu {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .menu a {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: gray;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #fff2bc;
+        border-bottom: 5px solid gray;
+      }
+      .menu li {
+        float: left;
+      }
+    </style>
+    <ul class="menu">
+      <li><a href="/" class="current">Home</a></li>
+      <li><a href="/users">People</a></li>
+    </ul>
+  </head>
+  <body>
+    <form action="/users" method="post">
+      <h3>Добавление пациента</h3>
+      <p><label>Ф.И.О.: </label> <input type="text" name="name" value="" requied />
+      <p><label>Пол: </label> <input type="text" name="gender" value="" requied />
+      <p><label>Возраст: </label> <input type="text" name="age" value="" requied />
+      <p><label>Группа крови: </label> <input type="text" name="blood" value="" requied />
+      <p><input type="submit" value="Добавить" />
+    </form>
+    <br>
+    <form action="" method="post">
+      <h3>Удаление пациента</h3>
+      <p><label>id: </label> <input type="text" name="id" size="5" value="" requied />
+      <input type="submit" name="del" value="Удалить" />
+    </form>
+    <br><br>
+    {% for user in users %}
+      <p>{{ user.id }}. {{ user.name }} - {{ user.blood }}</p>
+    {% endfor %}
+  </body>
+</html>
