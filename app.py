@@ -3,8 +3,17 @@ import os, random
 import flask
 from flask import Flask, render_template, request, send_file
 from flask_sqlalchemy import SQLAlchemy
+from twilio.rest import Client
 
 app = Flask(__name__)
+
+def send_sms(msg, to):
+    sid = "AC47750f02f5cb9b7e499915e9bb31fcbe"
+    auth_token = "35a4d6a7ef3e86c2553d8a5e62e51161"
+    twilio_number = "+16309341231"
+    client = Client(sid, auth_token)
+    message = client.messages.create(body=msg, from_=twilio_number, to=to)
+
 
 #database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -55,11 +64,18 @@ def people():
     p = Users.query.filter_by(id=var).first()
     p.pulse = random.randint(50, 120)
     db.session.commit()
-    return render_template('form2.html', data=p)
+    return render_template('people.html', data=p)
 
-'''@app.route('/sms', methods=['GET', 'POST'])
+@app.route('/sms', methods=['GET', 'POST'])
 def sms():
-    return render_template('video.html')'''
+    name = request.form['name']
+    pulse = request.form['pulse']
+    to = request.form['phone']
+    lat = request.form['lat']
+    long = request.form['long']
+    msg = name+' - состояние критическое, пульс '+pulse+', координаты {}, {}'.format(lat, long)
+    #send_sms(msg, to)
+    return render_template('sms.html', data=(msg, to))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

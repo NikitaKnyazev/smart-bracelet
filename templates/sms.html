@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Умный браслет здоровья</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <style>
+      .menu {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .menu a {
+        text-decoration: none;
+        font-family: sans-serif;
+        color: gray;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #fff2bc;
+        border-bottom: 5px solid gray;
+      }
+      .menu li {
+        float: left;
+      }
+    </style>
+    <ul class="menu">
+      <li><a href="/" class="current">Home</a></li>
+      <li><a href="/users">People</a></li>
+    </ul>
+  </head>
+  <body>
+    <h3>Сообщение отправлено!</h3>
+    <p><b>Адресат:</b> {{ data[1] }}</p>
+    <br>
+    <b>Текст сообщения:</b>
+    <p>{{ data[0] }}<p>
+  </body>
+</html>

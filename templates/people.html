@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Умный браслет здоровья</title>
-    <meta http-equiv="Refresh" content="30" />
+    <meta http-equiv="Refresh" content="45" />
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <style>
       .menu {
@@ -82,5 +82,17 @@
         x.innerHTML = "<center><br>Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
       }
     </script>
+    <br><br><br>
+    {% if data.pulse >= 100 or data.pulse < 60 %}
+      <form action="/sms" method="post">
+        <h3>Отправить смс</h3>
+        <p><label>Тел.: </label> <input type="text" name="phone" value="" requied />
+        <p><label>Ф.И.О.: </label> <input type="text" name="name" value="{{ data.name }}" requied />
+        <p><label>Пульс: </label> <input type="text" name="pulse" value="{{ data.pulse }}" requied />
+        <p><label>Широта: </label> <input type="text" name="lat" value="" requied />
+        <p><label>Долгота: </label> <input type="text" name="long" value="" requied />
+        <p><input type="submit" value="Отправить" />
+      </form>
+    {% endif %}
   </body>
 </html>
