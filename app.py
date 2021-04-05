@@ -4,6 +4,8 @@ import flask
 from flask import Flask, render_template, request, send_file
 from flask_sqlalchemy import SQLAlchemy
 from twilio.rest import Client
+import serial
+from serial import Serial
 
 app = Flask(__name__)
 
@@ -62,7 +64,32 @@ def del_user():
 def people():
     var = int(request.args.get('my_var', None))
     p = Users.query.filter_by(id=var).first()
-    p.pulse = random.randint(50, 120)
+
+    pulse = 0
+    ser = Serial('COM2', baudrate = 9600)
+    data = ser.read()
+    data = data.decode('utf-8')
+    try:
+        data = int(data)
+        pulse = 10*pulse + data
+    except:
+        data = 0
+    data = ser.read()
+    data = data.decode('utf-8')
+    try:
+        data = int(data)
+        pulse = 10*pulse + data
+    except:
+        data = 0
+    data = ser.read()
+    data = data.decode('utf-8')
+    try:
+        data = int(data)
+        pulse = 10*pulse + data
+    except:
+        data = 0
+
+    p.pulse = pulse
     db.session.commit()
     return render_template('people.html', data=p)
 
