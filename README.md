@@ -5,16 +5,17 @@
 Шарафутдинов Тимур 433 группа
 <br><br>
 ## Требования:
-Для Python:
-click==7.1.2
-Flask==1.1.2
-gunicorn==20.0.4
-itsdangerous==1.1.0
-Jinja2==2.11.1
-MarkupSafe==1.1.1
-Werkzeug==1.0.1
-flask-sqlalchemy==2.5.1
-twilio==6.55.0
+Для Python:<br>
+click==7.1.2<br>
+Flask==1.1.2<br>
+gunicorn==20.0.4<br>
+itsdangerous==1.1.0<br>
+Jinja2==2.11.1<br>
+MarkupSafe==1.1.1<br>
+Werkzeug==1.0.1<br>
+flask-sqlalchemy==2.5.1<br>
+twilio==6.55.0<br>
+pyserial==3.5<br>
 <br>
 Для Proteus:
 Библиотека для Arduino uno
